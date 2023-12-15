@@ -136,14 +136,15 @@ class Puzzle(db.Model):
         self.order = order
 
     def get_prerequisites(self):
+        print("GETTING PREREQUISITIES")
         p = Puzzle.query.join(PuzzlePrerequisite, Puzzle.id_puzzle == PuzzlePrerequisite.id_previous_puzzle)\
             .filter_by(id_new_puzzle=self.id_puzzle).all()
         return p
 
     def _get_used_hints(self, id_team):
-        return TeamUsedHint.query\
+        return TeamUsedHint.query.select_from(TeamUsedHint)\
             .filter_by(id_team=id_team)\
-            .join(Hint)\
+            .join(Hint, TeamUsedHint.id_hint == Hint.id_hint)\
             .filter(Hint.id_puzzle == self.id_puzzle)
 
     def get_used_hints(self, id_team):
@@ -380,9 +381,10 @@ class Hint(db.Model):
         return "hints_are_ordered" in puzzlehunt_settings and puzzlehunt_settings["hints_are_ordered"].value == "True"
 
     def _all_previous_hints_used(self, id_team):
+        print("GETTING PREVIOUS HINTS")
         previous_hints_count = TeamUsedHint.query\
             .filter_by(id_team=id_team)\
-            .join(Hint)\
+            .join(Hint, TeamUsedHint.id_hint == Hint.id_hint)\
             .filter(Hint.id_puzzle == self.id_puzzle)\
             .count()
         return previous_hints_count + 1 >= self.order

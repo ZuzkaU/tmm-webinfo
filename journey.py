@@ -17,14 +17,14 @@ def index():
     if current_user.is_admin:
         return redirect("/puzzlehunts")
 
-    team_solves_with_arrivals = TeamSolved.query\
+    team_solves_with_arrivals = TeamSolved.query.select_from(TeamSolved)\
         .filter_by(id_team=current_user.id_team)\
         .join(Puzzle)\
         .join(TeamArrived,
               (TeamSolved.id_puzzle == TeamArrived.id_puzzle) & (TeamSolved.id_team == TeamArrived.id_team))\
         .with_entities(TeamSolved, TeamArrived)\
         .all()
-    team_arrivals = TeamArrived.query\
+    team_arrivals = TeamArrived.query.select_from(TeamArrived)\
         .filter_by(id_team=current_user.id_team)\
         .join(Puzzle)\
         .filter(Puzzle.id_puzzle.not_in(
@@ -32,7 +32,7 @@ def index():
                 .filter_by(id_team=current_user.id_team)
                 .with_entities(TeamSolved.id_puzzle)))\
         .all()
-    team_submitted_codes = TeamSubmittedCode.query \
+    team_submitted_codes = TeamSubmittedCode.query.select_from(TeamSubmittedCode) \
         .filter_by(id_team=current_user.id_team) \
         .order_by(TeamSubmittedCode.timestamp.desc())\
         .join(Code)\
