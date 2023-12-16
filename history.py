@@ -65,7 +65,7 @@ def arrival_edit(id_team, id_puzzle):
         db.session.commit()
         return redirect(f"/history/{id_team}")
     else:
-        return render("history_entry_edit.html", heading="Upravit čas příchodu", back_url=f"/history/{id_team}", entry=arrival)
+        return render("history_entry_edit.html", heading="Edit arrival time", back_url=f"/history/{id_team}", entry=arrival)
 
 
 @history_blueprint.route('/history/<id_team>/arrival/<id_puzzle>/delete', methods=("POST",))
@@ -73,13 +73,13 @@ def arrival_edit(id_team, id_puzzle):
 def arrival_delete(id_team, id_puzzle):
     arrival = TeamArrived.query.get((id_team, id_puzzle))
     if arrival is None:
-        flash(f'Příchod neexistuje.', "danger")
+        flash(f'Arrival doesn\'t exist.', "danger")
     else:
         team = arrival.team
         puzzle = arrival.puzzle
         db.session.delete(arrival)
         db.session.commit()
-        flash(f'Příchod týmu "{team.name}" na šifru "{puzzle.puzzle}" smazán.', "success")
+        flash(f'Arrival of team "{team.name}" to puzzle "{puzzle.puzzle}" deleted.', "success")
     return redirect(f"/history/{id_team}")
 
 
@@ -94,7 +94,7 @@ def solve_edit(id_team, id_puzzle):
         db.session.commit()
         return redirect(f"/history/{id_team}")
     else:
-        return render("history_entry_edit.html", heading="Upravit čas vyřešení", back_url=f"/history/{id_team}", entry=solve)
+        return render("history_entry_edit.html", heading="Edit solution time", back_url=f"/history/{id_team}", entry=solve)
 
 
 @history_blueprint.route('/history/<id_team>/solve/<id_puzzle>/delete', methods=("POST",))
@@ -102,13 +102,13 @@ def solve_edit(id_team, id_puzzle):
 def solve_delete(id_team, id_puzzle):
     solve = TeamSolved.query.get((id_team, id_puzzle))
     if solve is None:
-        flash(f'Vyřešení neexistuje.', "danger")
+        flash(f'Solving doesn\'t exist.', "danger")
     else:
         team = solve.team
         puzzle = solve.puzzle
         db.session.delete(solve)
         db.session.commit()
-        flash(f'Vyřešení šifry "{puzzle.puzzle}" týmem "{team.name}" smazáno.', "success")
+        flash(f'Solving puzzle "{puzzle.puzzle}" by the team "{team.name}" deleted.', "success")
     return redirect(f"/history/{id_team}")
 
 
@@ -123,7 +123,7 @@ def code_submit_edit(id_team, id_code):
         db.session.commit()
         return redirect(f"/history/{id_team}")
     else:
-        return render("history_entry_edit.html", heading="Upravit čas zadání kódu", back_url=f"/history/{id_team}", entry=code_submit)
+        return render("history_entry_edit.html", heading="Edit time of entering code", back_url=f"/history/{id_team}", entry=code_submit)
 
 
 @history_blueprint.route('/history/<id_team>/code/<id_code>/delete', methods=("POST",))
@@ -131,13 +131,13 @@ def code_submit_edit(id_team, id_code):
 def code_submit_delete(id_team, id_code):
     code_submit = TeamSubmittedCode.query.get((id_team, id_code))
     if code_submit is None:
-        flash(f'Zadání kódu neexistuje.', "danger")
+        flash(f'Code submit doesn\'t exist.', "danger")
     else:
         team = code_submit.team
         code = code_submit.code
         db.session.delete(code_submit)
         db.session.commit()
-        flash(f'Zadání kódu "{code.code}" týmem "{team.name}" smazáno.', "success")
+        flash(f'Code submit "{code.code}" by team "{team.name}" deleted.', "success")
     return redirect(f"/history/{id_team}")
 
 
@@ -152,7 +152,7 @@ def hint_used_edit(id_team, id_hint):
         db.session.commit()
         return redirect(f"/history/{id_team}")
     else:
-        return render("history_entry_edit.html", heading="Upravit čas zobrazení nápovědy", back_url=f"/history/{id_team}", entry=hint_used)
+        return render("history_entry_edit.html", heading="Edit time of seeing the hint", back_url=f"/history/{id_team}", entry=hint_used)
 
 
 @history_blueprint.route('/history/<id_team>/hint/<id_hint>/delete', methods=("POST",))
@@ -160,13 +160,13 @@ def hint_used_edit(id_team, id_hint):
 def hint_used_delete(id_team, id_hint):
     hint_used = TeamUsedHint.query.get((id_team, id_hint))
     if hint_used is None:
-        flash(f'Zobrazení nápovědy neexistuje.', "danger")
+        flash(f'Hint hasn\'t been used.', "danger")
     else:
         team = hint_used.team
         hint = hint_used.hint
         db.session.delete(hint_used)
         db.session.commit()
-        flash(f'Zobrazení {hint.order}.nápovědy týmem "{team.name}" smazáno.', "success")
+        flash(f'Hint {hint.order}. by the team "{team.name}" deleted.', "success")
     return redirect(f"/history/{id_team}")
 
 
@@ -181,7 +181,7 @@ def wrong_code_edit(id_team, id_wrong_code):
         db.session.commit()
         return redirect(f"/history/{id_team}")
     else:
-        return render("history_entry_edit.html", heading="Upravit čas zadání špatného kódu", back_url=f"/history/{id_team}", entry=wrong_code)
+        return render("history_entry_edit.html", heading="Edit time of entering wrong code", back_url=f"/history/{id_team}", entry=wrong_code)
 
 
 @history_blueprint.route('/history/<id_team>/wrong/<id_wrong_code>/delete', methods=("POST",))
@@ -189,11 +189,11 @@ def wrong_code_edit(id_team, id_wrong_code):
 def wrong_code_submit_delete(id_team, id_wrong_code):
     wrong_code = WrongCode.query.get(id_wrong_code)
     if wrong_code is None:
-        flash(f'Zadání špatného kódu neexistuje.', "danger")
+        flash(f'Entering wrong code doesn\'t exist.', "danger")
     else:
         team = wrong_code.team
         code = wrong_code.code
         db.session.delete(wrong_code)
         db.session.commit()
-        flash(f'Zadání špatného kódu "{code.code}" týmem "{team.name}" smazáno.', "success")
+        flash(f'Entering wrong code "{code.code}" by the team "{team.name}" deleted.', "success")
     return redirect(f"/history/{id_team}")
