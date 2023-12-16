@@ -49,7 +49,7 @@ def submit_code(id_team=None):
         id_team = current_user.id_team
     else:
         if not current_user.is_admin:
-            flash("Tato operace je dostupná pouze organizátorům.", "danger")
+            flash("This operation is only available for organizers.", "danger")
             return redirect("/")
 
     solved_puzzles_ids_query = TeamSolved.query\
@@ -69,7 +69,7 @@ def submit_code(id_team=None):
             team_solved = TeamSolved(id_team, solution.id_puzzle, solution.id_solution_code)
             db.session.add(team_solved)
             db.session.commit()
-            flash_message = f'Řešení "{solution.code}" je správně.'
+            flash_message = f'Solution "{solution.code}" is correct.'
             if solution.message:
                 flash_message += f'<div class="mt-2">{solution.message}</div>'
             flash(flash_message, "success")
@@ -93,13 +93,13 @@ def submit_code(id_team=None):
                 .filter_by(id_team=id_team)\
                 .filter(TeamSolved.id_puzzle.in_(prerequisites))
             if fulfilled_prerequisites.count() < prerequisites.count():
-                flash(f'Nejdřív musíte vyřešit předchozí šifry.', "danger")
+                flash(f'First you need to solve previous puzzles.', "danger")
                 return redirect("/")
 
             team_arrived = TeamArrived(id_team, arrival.id_puzzle, arrival.id_arrival_code)
             db.session.add(team_arrived)
             db.session.commit()
-            flash_message = f'Kód stanoviště "{arrival.code}" je správný. Šifra "{arrival.puzzle.puzzle}" otevřena.'
+            flash_message = f'The code "{arrival.code}" is correct. Puzzle "{arrival.puzzle.puzzle}" is unlocked.'
             if arrival.message:
                 flash_message += f'<div class="mt-2">{arrival.message}</div>'
             flash(flash_message, "success")
@@ -117,13 +117,13 @@ def submit_code(id_team=None):
             team_submitted_code = TeamSubmittedCode(id_team, puzzlehunt_code.id_code)
             db.session.add(team_submitted_code)
             db.session.commit()
-            flash_message = f'Kód "{puzzlehunt_code.code}" je správný.'
+            flash_message = f'The code "{puzzlehunt_code.code}" is correct.'
             if puzzlehunt_code.message:
                 flash_message += f'<div class="mt-2">{puzzlehunt_code.message}</div>'
             flash(flash_message, "success")
             return redirect("/")
 
-    flash(f'Kód "{code}" není správný (nebo už byl zadán).', "danger")
+    flash(f'The code "{code}" is not correct or has been already entered.', "danger")
     wrong_code = WrongCode(id_team, code)
     db.session.add(wrong_code)
     db.session.commit()
@@ -143,19 +143,19 @@ def use_hint(id_hint, id_team=None):
     if id_team is None:
         id_team = current_user.id_team
     elif not current_user.is_admin:
-        flash("Tato operace je dostupná pouze organizátorům.", "danger")
+        flash("This operation is only available for organizers.", "danger")
         return redirect("/")
 
     hint = Hint.query.get(id_hint)
     if hint is None:
-        flash("Nápověda neexistuje.", "warning")
+        flash("Hint doesn't exist.", "warning")
         return redirect("/")
     team_arrival = TeamArrived.query.get((id_team, hint.id_puzzle))
     if team_arrival is None:
-        flash("Nejprve zadejte kód stanoviště.", "warning")
+        flash("First enter the station code.", "warning")
         return redirect("/")
     if not hint.is_open(team_arrival.timestamp, id_team):
-        flash("Nápověda ještě není k dispozici.", "warning")
+        flash("Hint is not available yet.", "warning")
         return redirect("/")
 
     team_used_hint = TeamUsedHint(id_team, id_hint)

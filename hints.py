@@ -36,7 +36,7 @@ def hints_edit(id_puzzle, id_hint):
         return redirect("/puzzles")
     hint = Hint.query.get(id_hint)
     if hint is None:
-        flash(f"Nápověda s id_hint={id_hint} neexistuje.", "warning")
+        flash(f"Hint with id_hint={id_hint} doesn\'t exist.", "warning")
         return redirect(f"/puzzles/{id_puzzle}")
 
     if request.method == "POST":
@@ -55,14 +55,14 @@ def hints_edit(id_puzzle, id_hint):
 def prerequisites_delete(id_puzzle, id_hint):
     puzzle = Puzzle.query.get(id_puzzle)
     if puzzle is None:
-        flash(f"Šifra s id_puzzle={id_puzzle} neexistuje.", "warning")
+        flash(f"Puzzle with id_puzzle={id_puzzle} doesn't exist.", "warning")
         return redirect("/puzzles")
     hint = Hint.query.get(id_hint)
     if hint is None:
-        flash(f"Nápověda s id_hint={id_hint} neexistuje.", "warning")
+        flash(f"Hint with id_hint={id_hint} doesn't exist.", "warning")
         return redirect(f"/puzzles/{id_puzzle}")
 
     db.session.delete(hint)
     db.session.commit()
-    flash(f'{hint.order}. nápověda k šifře "{puzzle.puzzle}" smazána.', "success")
+    flash(f'{hint.order}. hint to puzzle "{puzzle.puzzle}" deleted.', "success")
     return redirect(f"/puzzles/{id_puzzle}")

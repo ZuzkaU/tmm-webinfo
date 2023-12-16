@@ -41,7 +41,7 @@ def codes_new(id_puzzlehunt):
         db.session.add(code)
         db.session.commit()
         return redirect(f"/puzzlehunts/{id_puzzlehunt}")
-    return render("code_edit.html", heading="Přidat kód do šifrovačky", back_url=f"/puzzlehunts/{id_puzzlehunt}")
+    return render("code_edit.html", heading="Add code to puzzle hunt", back_url=f"/puzzlehunts/{id_puzzlehunt}")
 
 
 @codes.route('/puzzlehunts/<id_puzzlehunt>/codes/<id_code>', methods=("GET", "POST"))
@@ -49,7 +49,7 @@ def codes_new(id_puzzlehunt):
 def codes_edit(id_puzzlehunt, id_code):
     code = Code.query.get(id_code)
     if code is None:
-        flash(f"Kód s id_code={id_code} neexistuje.", "warning")
+        flash(f"The code with id_code={id_code} doesn't exist.", "warning")
         return redirect(f"/puzzlehunts/{id_puzzlehunt}")
 
     if request.method == "POST":
@@ -59,7 +59,7 @@ def codes_edit(id_puzzlehunt, id_code):
         db.session.commit()
         return redirect(f"/puzzlehunts/{id_puzzlehunt}")
     else:
-        return render("code_edit.html", heading="Upravit kód", back_url=f"/puzzlehunts/{id_puzzlehunt}", code=code)
+        return render("code_edit.html", heading="Edit code", back_url=f"/puzzlehunts/{id_puzzlehunt}", code=code)
 
 
 @codes.route('/puzzlehunts/<id_puzzlehunt>/codes/<id_code>/delete', methods=("POST",))
@@ -67,12 +67,12 @@ def codes_edit(id_puzzlehunt, id_code):
 def codes_delete(id_puzzlehunt, id_code):
     code = Code.query.get(id_code)
     if code is None:
-        flash(f"Kód s id_code={id_code} neexistuje.", "warning")
+        flash(f"The code with id_code={id_code} doesn't exist.", "warning")
         return redirect(f"/puzzlehunts/{id_puzzlehunt}")
 
     db.session.delete(code)
     db.session.commit()
-    flash(f'Kód "{code.code}" smazán.', "success")
+    flash(f'Code "{code.code}" deleted.', "success")
     return redirect(f"/puzzlehunts/{id_puzzlehunt}")
 
 
@@ -88,7 +88,7 @@ def get_arrival_codes(id_puzzle):
 def arrival_codes_new(id_puzzle):
     puzzle = Puzzle.query.get(id_puzzle)
     if puzzle is None:
-        flash(f"Šifra s id_puzzle={id_puzzle} neexistuje.", "warning")
+        flash(f"Puzzle with id_puzzle={id_puzzle} doesn't exist.", "warning")
         return redirect("/puzzles")
 
     if request.method == "POST":
@@ -96,7 +96,7 @@ def arrival_codes_new(id_puzzle):
         db.session.add(code)
         db.session.commit()
         return redirect(f"/puzzles/{id_puzzle}")
-    return render("code_edit.html", heading="Přidat kód na otevření šifry", back_url=f"/puzzles/{id_puzzle}", puzzle=puzzle)
+    return render("code_edit.html", heading="Add code to open a puzzle", back_url=f"/puzzles/{id_puzzle}", puzzle=puzzle)
 
 
 @codes.route('/puzzles/<id_puzzle>/arrival_codes/<id_arrival_code>', methods=("GET", "POST"))
@@ -104,11 +104,11 @@ def arrival_codes_new(id_puzzle):
 def arrival_codes_edit(id_puzzle, id_arrival_code):
     puzzle = Puzzle.query.get(id_puzzle)
     if puzzle is None:
-        flash(f"Šifra s id_puzzle={id_puzzle} neexistuje.", "warning")
+        flash(f"Puzzle with id_puzzle={id_puzzle} doesn't exist.", "warning")
         return redirect("/puzzles")
     arrival_code = ArrivalCode.query.get(id_arrival_code)
     if arrival_code is None:
-        flash(f"Kód s id_arrival_code={id_arrival_code} neexistuje.", "warning")
+        flash(f"Code with id_arrival_code={id_arrival_code} doesn't exist.", "warning")
         return redirect(f"/puzzles/{id_puzzle}")
 
     if request.method == "POST":
@@ -126,12 +126,12 @@ def arrival_codes_edit(id_puzzle, id_arrival_code):
 def arrival_codes_delete(id_puzzle, id_arrival_code):
     arrival_code = ArrivalCode.query.get(id_arrival_code)
     if arrival_code is None:
-        flash(f"Kód s id_arrival_code={id_arrival_code} neexistuje.", "warning")
+        flash(f"Code with id_arrival_code={id_arrival_code} doesn't exist.", "warning")
         return redirect(f"/puzzles/{id_puzzle}")
 
     db.session.delete(arrival_code)
     db.session.commit()
-    flash(f'Kód "{arrival_code.code}" smazán.', "success")
+    flash(f'Code "{arrival_code.code}" deleted.', "success")
     return redirect(f"/puzzles/{id_puzzle}")
 
 
@@ -147,7 +147,7 @@ def get_solution_codes(id_puzzle):
 def solution_codes_new(id_puzzle):
     puzzle = Puzzle.query.get(id_puzzle)
     if puzzle is None:
-        flash(f"Šifra s id_puzzle={id_puzzle} neexistuje.", "warning")
+        flash(f"Puzzle with id_puzzle={id_puzzle} doesn't exist.", "warning")
         return redirect("/puzzles")
 
     if request.method == "POST":
@@ -155,7 +155,7 @@ def solution_codes_new(id_puzzle):
         db.session.add(code)
         db.session.commit()
         return redirect(f"/puzzles/{id_puzzle}")
-    return render("code_edit.html", heading="Přidat řešení šifry", back_url=f"/puzzles/{id_puzzle}", puzzle=puzzle)
+    return render("code_edit.html", heading="Add puzzle solution", back_url=f"/puzzles/{id_puzzle}", puzzle=puzzle)
 
 
 @codes.route('/puzzles/<id_puzzle>/solution_codes/<id_solution_code>', methods=("GET", "POST"))
@@ -163,11 +163,11 @@ def solution_codes_new(id_puzzle):
 def solution_codes_edit(id_puzzle, id_solution_code):
     puzzle = Puzzle.query.get(id_puzzle)
     if puzzle is None:
-        flash(f"Šifra s id_puzzle={id_puzzle} neexistuje.", "warning")
+        flash(f"Puzzle with id_puzzle={id_puzzle} doesn't exist.", "warning")
         return redirect("/puzzles")
     solution_code = SolutionCode.query.get(id_solution_code)
     if solution_code is None:
-        flash(f"Řešení s id_solution_code={id_solution_code} neexistuje.", "warning")
+        flash(f"Solution with id_solution_code={id_solution_code} doesn't exist.", "warning")
         return redirect(f"/puzzles/{id_puzzle}")
 
     if request.method == "POST":
@@ -177,7 +177,7 @@ def solution_codes_edit(id_puzzle, id_solution_code):
         db.session.commit()
         return redirect(f"/puzzles/{id_puzzle}")
     else:
-        return render("code_edit.html", heading="Upravit řešení", back_url=f"/puzzles/{id_puzzle}", code=solution_code, puzzle=puzzle)
+        return render("code_edit.html", heading="Edit solution", back_url=f"/puzzles/{id_puzzle}", code=solution_code, puzzle=puzzle)
 
 
 @codes.route('/puzzles/<id_puzzle>/solution_codes/<id_solution_code>/delete', methods=("POST",))
@@ -185,11 +185,11 @@ def solution_codes_edit(id_puzzle, id_solution_code):
 def solution_codes_delete(id_puzzle, id_solution_code):
     solution_code = SolutionCode.query.get(id_solution_code)
     if solution_code is None:
-        flash(f"Řešení s id_solution_code={id_solution_code} neexistuje.", "warning")
+        flash(f"Solution with id_solution_code={id_solution_code} doesn't exist.", "warning")
         return redirect(f"/puzzles/{id_puzzle}")
 
     db.session.delete(solution_code)
     db.session.commit()
-    flash(f'Řešení "{solution_code.code}" smazáno.', "success")
+    flash(f'Solution "{solution_code.code}" deleted.', "success")
     return redirect(f"/puzzles/{id_puzzle}")
 
