@@ -3,7 +3,7 @@
 {% extends "base_admin.html" %}
 
 {% block content_admin %}
-    <h1>Výsledky</h1>
+    <h1>Results</h1>
 
     <div class="table-responsive">
     <table class="table table-striped text-center">
@@ -11,13 +11,13 @@
         <tr>
             <th scope="col">Tým</th>
             <th scope="col" class="border-start">Start</th>
-            <th scope="col" class="border-start">Cíl</th>
-            <th scope="col" class="border-start">Čas</th>
-            <th scope="col" class="border-start">Pořadí</th>
-            <th scope="col" class="border-start">&Sum; náp.</th>
-            <th scope="col" class="border-start">Penalizace</th>
-            <th scope="col" class="border-start">Čas s penalizací</th>
-            <th scope="col" class="border-start">Pořadí s penalizací</th>
+            <th scope="col" class="border-start">Finish</th>
+            <th scope="col" class="border-start">Time</th>
+            <th scope="col" class="border-start">Rank</th>
+            <th scope="col" class="border-start">&Sum; hints</th>
+            <th scope="col" class="border-start">Penalty</th>
+            <th scope="col" class="border-start">Time with penalty</th>
+            <th scope="col" class="border-start">Rank with penalty</th>
         </tr>
         </thead>
         <tbody>
@@ -39,12 +39,12 @@
     </div>
 
     <form method="post" action="/results/hint_penalty" class="mt-3 row row-cols-sm-auto g-2 align-items-center">
-        <label for="hint_penalty" class="col-5 col-form-label">Penalizace za nápovědu (minuty)</label>
+        <label for="hint_penalty" class="col-5 col-form-label">Hint penalty (minutes)</label>
         <div class="col-3">
             <input type="number" class="form-control" id="hint_penalty" name="hint_penalty" value="{{ hint_penalty }}">
         </div>
         <div class="col-4">
-            <button type="submit" class="btn btn-primary">Změnit</button>
+            <button type="submit" class="btn btn-primary">Change</button>
         </div>
     </form>
 {% endblock content_admin %}

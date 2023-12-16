@@ -8,28 +8,28 @@
     <form method="post">
         {% if puzzle %}
             <div class="row mb-3">
-            <label for="puzzle" class="col-3 col-form-label">Šifra</label>
+            <label for="puzzle" class="col-3 col-form-label">Puzzle</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="puzzle" name="puzzle" disabled value="{{ puzzle.puzzle }}">
             </div>
         </div>
         {% endif %}
         <div class="row mb-3">
-            <label for="code" class="col-3 col-form-label required">Kód</label>
+            <label for="code" class="col-3 col-form-label required">Code</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="code" name="code" required value="{{ code.code if code else "" }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="message" class="col-3 col-form-label">Zpráva</label>
+            <label for="message" class="col-3 col-form-label">Message</label>
             <div class="col-9">
                 {{ macros.html_textarea("message", code.message if code else "") }}
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <button type="submit" class="btn btn-primary mb-1 me-1">Uložit</button>
-                <a class="btn btn-secondary mb-1 me-1" href="{{ back_url }}" role="button">Zpět</a>
+                <button type="submit" class="btn btn-primary mb-1 me-1">Save</button>
+                <a class="btn btn-secondary mb-1 me-1" href="{{ back_url }}" role="button">Back</a>
             </div>
         </div>
     </form>

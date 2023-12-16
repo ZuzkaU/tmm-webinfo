@@ -3,7 +3,7 @@
 {% extends "base_admin.html" %}
 
 {% block content_admin %}
-    <h1>Průběh hry</h1>
+    <h1>Game progress</h1>
 
     <div class="table-responsive">
     <table class="table table-striped text-center">
@@ -22,19 +22,19 @@
             <th scope="col"></th>
         </tr>
         <tr>
-            <th scope="col">Tým</th>
+            <th scope="col">Team</th>
             {% if start_times %}
                 <th scope="col" class="border-start">Start</th>
             {% endif %}
             {% for puzzle in puzzles %}
-                <th scope="col" class="border-start">Př.</th>
-                <th scope="col">Od.</th>
-                <th scope="col">Náp.</th>
+                <th scope="col" class="border-start">Arr.</th>
+                <th scope="col">Dep.</th>
+                <th scope="col">Hints</th>
             {% endfor %}
             {% if finish_times %}
-                <th scope="col" class="border-start">Cíl</th>
+                <th scope="col" class="border-start">End</th>
             {% endif %}
-            <th scope="col" class="border-start">&Sum; náp.</th>
+            <th scope="col" class="border-start">&Sum; hints</th>
         </tr>
         </thead>
         <tbody>
