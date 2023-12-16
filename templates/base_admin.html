@@ -9,11 +9,11 @@
         <div class="col{{ "-auto" if fluid }}">
             {% if user.is_admin %}
                 {% block content_admin %}
-                    <h1>Administrace</h1>
+                    <h1>Administration</h1>
                 {% endblock content_admin %}
             {% else %}
                 <div class="alert alert-danger fade show" role="alert">
-                    Tato stránka je dostupná pouze organizátorům.
+                    This page is only accessible by organizers.
                 </div>
             {% endif %}
         </div>
