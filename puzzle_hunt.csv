@@ -1,6 +1,12 @@
 order,puzzle,arrival_code,solution_code,solution_message,hint_1,hint_2,prerequisites
-1,Sifra 1,start,sol1,gluckwunsh,h1,dfgsebn,
-2,Sifra 2,s2,sol2,aaa,braille,dsbgrgs,1
-3,Sifra 3,s3,sol3,bbb,c,dfbsrb,2
-4,Sifra 4,s4,sol4,ccc,v,agawrg,3
-5,Sifra 5,s5,sol5,d,d,afd,4
+1,Tetris,tetris,imipossibility,https://maps.app.goo.gl/2An7UQirpvdv8Yxy8,You shouldn't need a hint for this one,,
+2,Arrows,arrows,idea,https://maps.app.goo.gl/gHb4qWqUrCWJAkXx7,Try to draw (black or white).,Draw in the direction of arrows with the corresponding color and you should see letters,1
+3,Quiz,quiz,diamond,https://maps.app.goo.gl/SeKvFfibwmvxqEETA,Solve the quiz and follow the intermediate solution,Read letters at answers that start with P,2
+4,Music,music,architect,https://maps.app.goo.gl/JKA9GQiPvcHqWPaGA,Maybe you can use some tool to recognize music if you can't figure it out?,Ask the tutors,3
+5,Water,water,permission,https://maps.app.goo.gl/4yaYeVPwkgUNSmjLA,Read the first letters. Maybe water has something to do with it.,If you dip the paper in water some words stay dry. Read the first letters again.,4
+6,Lego,lego,dance,https://maps.app.goo.gl/6ds3xoCH2C9T3smL8,Look from the other side.,On the other side of the lego tower you can see a word. Just draw how the other side looks like.,5
+7,Cubes,cubes,supermarket,https://maps.app.goo.gl/x7DQUip6ZqpVxSnH7,The words are not in straight lines. Some of them even use the same letter twice. But the letters are always next to each other.,The letters are in shapes of a cube net. If you build the cubes which letter will be on top?,6
+8,Images,images,throne,https://maps.app.goo.gl/Y813iMUK4gxXKjBF7,Name the images. Do they have something in common?,There is one extra letter in each pair. Read it.,7
+9,Riddles,riddles,independence,https://maps.app.goo.gl/cbvLU19C1scPtWUNA,Try to find the described objects.,The objects have the same number of letters as the description has words. Take the letter on the same position as the bold word.,8
+10,Dragon,dragon,hospital,"The next station is at the university, in the same room we started in. There will be one last riddle.",Does the dragon remind you of a map?,The dragon is a map of Europe. Assign the dishes to the correct country and take the letter.,9
+11,Crossword,crossword,conclusion,"Congratulations, you finished!",What were the previous solutions?,"Each solution of previous puzzles has a different number of letters, you can assign it uniquely.",10
