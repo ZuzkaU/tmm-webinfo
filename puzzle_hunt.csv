@@ -1,5 +1,5 @@
 order,puzzle,arrival_code,solution_code,solution_message,hint_1,hint_2,prerequisites
-1,Tetris,tetris,imipossibility,https://maps.app.goo.gl/2An7UQirpvdv8Yxy8,You shouldn't need a hint for this one,,
+1,Tetris,tetris,impossibility,https://maps.app.goo.gl/2An7UQirpvdv8Yxy8,You shouldn't need a hint for this one,,
 2,Arrows,arrows,idea,https://maps.app.goo.gl/gHb4qWqUrCWJAkXx7,Try to draw (black or white).,Draw in the direction of arrows with the corresponding color and you should see letters,1
 3,Quiz,quiz,diamond,https://maps.app.goo.gl/SeKvFfibwmvxqEETA,Solve the quiz and follow the intermediate solution,Read letters at answers that start with P,2
 4,Music,music,architect,https://maps.app.goo.gl/JKA9GQiPvcHqWPaGA,Maybe you can use some tool to recognize music if you can't figure it out?,Ask the tutors,3
