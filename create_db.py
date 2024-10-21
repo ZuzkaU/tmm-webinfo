@@ -5,7 +5,7 @@ with app.app_context():
     db.create_all()
 
     if db.session.query(Puzzlehunt).first() is None:
-        default_puzzlehunt = Puzzlehunt("Šifrovačka")
+        default_puzzlehunt = Puzzlehunt("TUMi Puzzle Hunt")
         db.session.add(default_puzzlehunt)
         db.session.commit()
         current_puzzlehunt = Settings("current_puzzlehunt")

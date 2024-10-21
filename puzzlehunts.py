@@ -88,7 +88,7 @@ def puzzlehunts_edit(id_puzzlehunt):
 def puzzlehunts_activate(id_puzzlehunt):
     puzzlehunt = Puzzlehunt.query.get(id_puzzlehunt)
     if puzzlehunt is None:
-        flash(f"Šifrovačka s id_puzzlehunt={id_puzzlehunt} neexistuje.", "warning")
+        flash(f"Puzzle hunt with id_puzzlehunt={id_puzzlehunt} doesn't exist.", "warning")
     else:
         current_puzzlehunt_setting = Settings.query.get("current_puzzlehunt")
         if current_puzzlehunt_setting is None:
@@ -96,7 +96,7 @@ def puzzlehunts_activate(id_puzzlehunt):
         current_puzzlehunt_setting.value = str(id_puzzlehunt)
         db.session.add(current_puzzlehunt_setting)
         db.session.commit()
-        flash(f'Aktivní šifrovačka nastavena na "{puzzlehunt.puzzlehunt}".', "success")
+        flash(f'Active puzzle hunt set to "{puzzlehunt.puzzlehunt}".', "success")
     return redirect("/puzzlehunts")
 
 
@@ -104,15 +104,15 @@ def puzzlehunts_activate(id_puzzlehunt):
 @admin_required
 def puzzlehunts_delete(id_puzzlehunt):
     if id_puzzlehunt == str(Puzzlehunt.get_current_id()):
-        flash(f"Aktivní šifrovačku nelze smazat.", "warning")
+        flash(f"It is not possible to delete active puzzle hunt.", "warning")
         return redirect("/puzzlehunts")
 
     puzzlehunt = Puzzlehunt.query.get(id_puzzlehunt)
     if puzzlehunt is None:
-        flash(f"Šifrovačka s id_puzzlehunt={id_puzzlehunt} neexistuje.", "warning")
+        flash(f"Puzzle hunt with id_puzzlehunt={id_puzzlehunt} doesn't exist.", "warning")
         return redirect("/puzzlehunts")
 
     db.session.delete(puzzlehunt)
     db.session.commit()
-    flash(f'Šifrovačka "{puzzlehunt.puzzlehunt}" smazána.', "success")
+    flash(f'Puzzle hunt "{puzzlehunt.puzzlehunt}" deleted.', "success")
     return redirect("/puzzlehunts")

@@ -2,7 +2,7 @@
 
 {% macro html_textarea(name, value) %}
     <textarea type="text" class="form-control" id="{{ name }}" name="{{ name }}" >{{ value }}</textarea>
-    <div class="mb-2 mt-2">Náhled:</div>
+    <div class="mb-2 mt-2">Preview:</div>
     <div id="{{ name }}_preview"></div>
     <script>
         const {{ name }}_html = document.getElementById("{{ name }}");
