@@ -255,7 +255,7 @@ class TeamArrived(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Příchod: {self.puzzle.puzzle}'
+        return f'Arrival: {self.puzzle.puzzle}'
 
     @property
     def edit_url(self):
@@ -287,7 +287,7 @@ class TeamSolved(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Vyřešeno: {self.puzzle.puzzle}'
+        return f'Solved: {self.puzzle.puzzle}'
 
     @property
     def edit_url(self):
@@ -316,7 +316,7 @@ class TeamSubmittedCode(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Zadán kód: "{self.code.code}"'
+        return f'Entered code: "{self.code.code}"'
 
     @property
     def edit_url(self):
@@ -345,7 +345,7 @@ class WrongCode(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Špatný kód: "{self.code}"'
+        return f'Wrong code: "{self.code}"'
 
     @property
     def edit_url(self):
@@ -425,7 +425,7 @@ class TeamUsedHint(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Zobrazení {self.hint.order}. nápovědy u šifry "{self.hint.puzzle.puzzle}"'
+        return f'Showed {self.hint.order}. hint at puzzle "{self.hint.puzzle.puzzle}"'
 
     @property
     def edit_url(self):

@@ -152,7 +152,7 @@ def use_hint(id_hint, id_team=None):
         return redirect("/")
     team_arrival = TeamArrived.query.get((id_team, hint.id_puzzle))
     if team_arrival is None:
-        flash("First enter the station code.", "warning")
+        flash("First enter the checkpoint code.", "warning")
         return redirect("/")
     if not hint.is_open(team_arrival.timestamp, id_team):
         flash("Hint is not available yet.", "warning")

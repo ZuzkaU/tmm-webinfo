@@ -25,10 +25,10 @@ def progress():
     current_puzzlehunt = Puzzlehunt.get_current()
     puzzlehunt_settings = current_puzzlehunt.get_settings()
     if "start_code" not in puzzlehunt_settings:
-        flash("Před zobrazením výsledků je potřeba nastavit kód pro start", "danger")
+        flash("You need to set the start code before showing results", "danger")
         return redirect(f'/puzzlehunts/{current_puzzlehunt.id_puzzlehunt}')
     if "finish_code" not in puzzlehunt_settings:
-        flash("Před zobrazením výsledků je potřeba nastavit kód pro cíl", "danger")
+        flash("You need to set the end code before showing results", "danger")
         return redirect(f'/puzzlehunts/{Puzzlehunt.get_current_id()}')
     start_code = int(puzzlehunt_settings["start_code"].value)
     finish_code = int(puzzlehunt_settings["finish_code"].value)
@@ -51,7 +51,7 @@ def progress():
     try:
         hint_penalty = int(puzzlehunt_settings["hint_penalty"].value)
     except (KeyError, ValueError):
-        flash("Penalizace za nápovědy není nastavena, zobrazují se výsledky s nulovou penalizací.", "warning")
+        flash("Hint penalty is not set, showing results without penalty for hints.", "warning")
 
     start_times = {}
     for start in TeamSubmittedCode.query \
@@ -105,5 +105,5 @@ def set_hint_penalty():
     hint_penalty.value = request.form["hint_penalty"]
     db.session.add(hint_penalty)
     db.session.commit()
-    flash(f"Penalizace za nápovědy nastavena na {request.form['hint_penalty']} minut.", "success")
+    flash(f"Penalty for hints set to {request.form['hint_penalty']} minutes.", "success")
     return redirect("/results")

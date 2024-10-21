@@ -11,34 +11,35 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label for="name" class="col-3 col-form-label required">Název týmu</label>
+            <label for="name" class="col-3 col-form-label required">Team Name</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="name" name="name" required value="{{ team.name if team }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="password" class="col-3 col-form-label {{ "required" if not team }}">Heslo</label>
+            <label for="password" class="col-3 col-form-label {{ "required" if not team }}">Password</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="password" name="password" {{ "required" if not team }} placeholder="{{ "Nechte prázdné pro zachování současného hesla." if team }}">
+                <input type="password" class="form-control" id="password" name="password" {{ "required" if not team }} placeholder="{{ "Leave empty to keep the current password." if team }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="phone" class="col-3 col-form-label">Telefon</label>
+            <label for="phone" class="col-3 col-form-label">Phone</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="phone" name="phone" value="{{ team.phone if team }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="note" class="col-3 col-form-label">Poznámka</label>
+            <label for="note" class="col-3 col-form-label">Note</label>
             <div class="col-9">
                 <textarea class="form-control" id="note" name="note" rows="1">{{ team.note if team }}</textarea>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <button type="submit" class="btn btn-primary mb-1 me-1">Uložit</button>
-                <a class="btn btn-secondary mb-1 me-1" href="/teams" role="button">Zpět</a>
+                <button type="submit" class="btn btn-primary mb-1 me-1">Save</button>
+                <a class="btn btn-secondary mb-1 me-1" href="/teams" role="button">Back</a>
             </div>
         </div>
     </form>
 {% endblock content_admin %}
+
