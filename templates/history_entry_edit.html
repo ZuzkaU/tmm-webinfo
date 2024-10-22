@@ -6,29 +6,29 @@
     <h2>{{ heading }}</h2>
     <form method="post">
         <div class="row mb-3">
-            <label for="team" class="col-3 col-form-label">Tým</label>
+            <label for="team" class="col-3 col-form-label">Team</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="team" name="team" disabled value="{{ entry.team.name }}">
             </div>
         </div>
         {% if entry|attr("puzzle") %}
             <div class="row mb-3">
-                <label for="puzzle" class="col-3 col-form-label">Šifra</label>
+                <label for="puzzle" class="col-3 col-form-label">Puzzle</label>
                 <div class="col-9">
                     <input type="text" class="form-control" id="puzzle" name="puzzle" disabled value="{{ entry.puzzle.puzzle }}">
                 </div>
             </div>
         {% endif %}
         <div class="row mb-3">
-            <label for="timestamp" class="col-3 col-form-label required">Čas</label>
+            <label for="timestamp" class="col-3 col-form-label required">Time</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="timestamp" name="timestamp" required value="{{ entry.formatted_timestamp }}">
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <button type="submit" class="btn btn-primary mb-1 me-1">Uložit</button>
-                <a class="btn btn-secondary mb-1 me-1" href="{{ back_url }}" role="button">Zpět</a>
+                <button type="submit" class="btn btn-primary mb-1 me-1">Save</button>
+                <a class="btn btn-secondary mb-1 me-1" href="{{ back_url }}" role="button">Back</a>
             </div>
         </div>
     </form>

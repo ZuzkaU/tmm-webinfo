@@ -3,7 +3,7 @@
 {% extends "base_admin.html" %}
 
 {% block content_admin %}
-    <h1>Týmy</h1>
+    <h1>Teams</h1>
     <ul class="list-group mb-3">
         {% for team in teams %}
             <li class="list-group-item d-flex align-items-center">
@@ -13,13 +13,13 @@
                 <div>
                     <a class="btn btn-primary" href="/history/{{ team.id_team }}" role="button"><i class="bi bi-clock-history"></i></a>
                     <a class="btn btn-warning" href="/teams/{{ team.id_team }}" role="button"><i class="bi bi-pencil-square"></i></a>
-                    <form method="post" action="/teams/{{ team.id_team }}/delete" class="d-inline" onsubmit='return confirm("Smazat tým \"{{ team.name }}\"?\nVarování: smažou se taky všechny příchody, vyřešené šifry, atd. tohoto týmu.")'>
+                    <form method="post" action="/teams/{{ team.id_team }}/delete" class="d-inline" onsubmit='return confirm("Delete team \"{{ team.name }}\"?\nWarning: deletes all arrivals, solved puzzles etc. of this team.")'>
                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                     </form>
                 </div>
             </li>
         {% endfor %}
     </ul>
-    <a class="btn btn-primary mb-1 me-1" href="/teams/new" role="button">Přidat tým</a>
-    <a class="btn btn-primary mb-1 me-1" href="/teams/csv_import" role="button">Importovat týmy z CSV</a>
+    <a class="btn btn-primary mb-1 me-1" href="/teams/new" role="button">Add a team</a>
+    <a class="btn btn-primary mb-1 me-1" href="/teams/csv_import" role="button">Import teams from CSV</a>
 {% endblock content_admin %}

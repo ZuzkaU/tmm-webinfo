@@ -10,18 +10,18 @@
         <div class="row mb-3">
             <div class="col d-flex">
                 <div class="flex-fill me-2">
-                    <input type="text" class="form-control" id="code" name="code" required value="" placeholder="Kód stanoviště nebo řešení šifry" maxlength="256">
+                    <input type="text" class="form-control" id="code" name="code" required value="" placeholder="Code of a checkpoint or puzzle solution" maxlength="256">
                     <label for="code"></label>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary">Odeslat</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </div>
             </div>
         </div>
     </form>
 
     {% if arrivals %}
-        <h3>Šifry</h3>
+        <h3>Puzzles</h3>
     {% endif %}
 
     {% for arrival in arrivals %}
@@ -31,9 +31,8 @@
 
             /** minut -> minutu, minuty */
             const declension = (n) => {
-                if (n === 1) return "u";
-                if (n >= 2 && n <= 4) return "y";
-                return "";
+                if (n === 1) return "";
+                if (n >= 2) return "s";
             }
 
             function setButtonTime(id_puzzle, hint_order) {
@@ -46,7 +45,7 @@
                 const seconds = time % 60;
 
                 document.getElementById(`hint_disabled_${id_puzzle}_${hint_order}`).innerText =
-                    `Za ${minutes} minut${declension(minutes)} ${seconds} sekund${declension(seconds)}`;
+                    `In ${minutes} minute${declension(minutes)} ${seconds} second${declension(seconds)}`;
             }
 
             function enableHint(id_puzzle, hint_order) {
@@ -75,23 +74,23 @@
                         <div>{{ arrival.puzzle.assignment|safe }}</div>
 
                         {% for hint in arrival.puzzle.get_used_hints(current_user.id_team) %}
-                            <h6 class="mt-2">Nápověda {{ hint.order }}</h6>
+                            <h6 class="mt-2">Hint {{ hint.order }}</h6>
                             <div>{{ hint.hint|safe }}</div>
                         {% endfor %}
 
                         {% for hint in arrival.puzzle.get_available_hints(current_user.id_team) %}
-                            <h6 class="mt-2">Nápověda {{ hint.order }}</h6>
+                            <h6 class="mt-2">Hint {{ hint.order }}</h6>
                             <form class="{{ "d-inline" if hint.is_open(arrival.timestamp, current_user.id_team) else "d-none" }}"
                                   id="hint_form_{{ arrival.id_puzzle }}_{{ hint.order }}"
-                                  method="post" action="/hint/{{ hint.id_hint }}" onsubmit='return confirm("Opravdu chcete nápovědu?")'
+                                  method="post" action="/hint/{{ hint.id_hint }}" onsubmit='return confirm("Do you really want a hint?")'
                             >
-                                <button type="submit" class="btn btn-primary">Zobrazit nápovědu</button>
+                                <button type="submit" class="btn btn-primary">Show hint</button>
                             </form>
                             <button class="btn btn-primary {{ "d-inline" if not hint.is_open(arrival.timestamp, current_user.id_team) else "d-none" }}"
                                     id="hint_disabled_{{ arrival.id_puzzle }}_{{ hint.order }}"
                                     type="button" disabled>
                                 {% if hint.requires_previous(current_user.id_team) %}
-                                    Nejprve použijte předchozí nápovědy
+                                    First use previous hints
                                 {% elif not hint.is_open(arrival.timestamp, current_user.id_team) %}
                                     <script>
                                         let id_puzzle = {{ arrival.id_puzzle }};
@@ -104,7 +103,7 @@
                         {% endfor %}
                     </div>
                     <div class="card-footer text-muted">
-                        <div>Příchod: {{ arrival.timestamp|format_time }}, kód stanoviště: "{{ arrival.arrival_code.code }}"</div>
+                        <div>Arrival: {{ arrival.timestamp|format_time }}, checkpoint code: "{{ arrival.arrival_code.code }}"</div>
                         {% if arrival.arrival_code.message %}
                             <div>{{ arrival.arrival_code.message|safe }}</div>
                         {% endif %}
@@ -115,7 +114,7 @@
     {% endfor %}
 
     {% if submitted_codes %}
-        <h3>Zadané kódy</h3>
+        <h3>Submitted codes</h3>
     {% endif %}
 
     {% for submitted_code in submitted_codes %}
@@ -123,11 +122,11 @@
             <div class="col">
                 <div class="card border-primary mb-3">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-file-earmark-code-fill text-primary me-2"></i>Kód: "{{ submitted_code.code.code }}"</h5>
+                        <h5 class="card-title"><i class="bi bi-file-earmark-code-fill text-primary me-2"></i>Code: "{{ submitted_code.code.code }}"</h5>
                         <div>{{ submitted_code.code.message|safe }}</div>
                     </div>
                     <div class="card-footer text-muted">
-                        <div>Zadáno: {{ submitted_code.timestamp|format_time }}</div>
+                        <div>Entered: {{ submitted_code.timestamp|format_time }}</div>
                     </div>
                 </div>
             </div>
@@ -135,7 +134,7 @@
     {% endfor %}
 
     {% if solves %}
-        <h3>Vyřešené šifry</h3>
+        <h3>Solved puzzles</h3>
     {% endif %}
 
     {% for solve, arrival in solves %}
@@ -147,11 +146,11 @@
                         <div>{{ solve.puzzle.assignment|safe }}</div>
                     </div>
                     <div class="card-footer text-muted">
-                        <div>Příchod: {{ arrival.timestamp|format_time }}, kód stanoviště: "{{ arrival.arrival_code.code }}"</div>
+                        <div>Arrival: {{ arrival.timestamp|format_time }}, checkpoint code: "{{ arrival.arrival_code.code }}"</div>
                         {% if arrival.arrival_code.message %}
                             <div>{{ arrival.arrival_code.message|safe }}</div>
                         {% endif %}
-                        <div class="mt-2">Odchod: {{ solve.timestamp|format_time }}, řešení: "{{ solve.solution_code.code }}"</div>
+                        <div class="mt-2">Departure: {{ solve.timestamp|format_time }}, solution: "{{ solve.solution_code.code }}"</div>
                         {% if solve.solution_code.message %}
                             <div>{{ solve.solution_code.message|safe }}</div>
                         {% endif %}

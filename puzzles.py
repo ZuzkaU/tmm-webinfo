@@ -32,7 +32,7 @@ def puzzles_new():
 def puzzles_edit(id_puzzle):
     puzzle = Puzzle.query.get(id_puzzle)
     if puzzle is None:
-        flash(f"Šifra s id_puzzle={id_puzzle} neexistuje.", "warning")
+        flash(f"Puzzle with id_puzzle={id_puzzle} doesn't exist.", "warning")
         return redirect("/puzzles")
 
     if request.method == "POST":
@@ -54,12 +54,12 @@ def puzzles_edit(id_puzzle):
 def puzzles_delete(id_puzzle):
     puzzle = Puzzle.query.get(id_puzzle)
     if puzzle is None:
-        flash(f"Šifra s id_puzzle={id_puzzle} neexistuje.", "warning")
+        flash(f"Puzzle with id_puzzle={id_puzzle} doesn't exist.", "warning")
         return redirect("/puzzles")
 
     db.session.delete(puzzle)
     db.session.commit()
-    flash(f'Šifra "{puzzle.puzzle}" smazána.', "success")
+    flash(f'Puzzle "{puzzle.puzzle}" deleted.', "success")
     return redirect("/puzzles")
 
 
@@ -86,7 +86,7 @@ def prerequisites_delete(id_new_puzzle, id_previous_puzzle):
     if prerequisite is not None:
         db.session.delete(prerequisite)
         db.session.commit()
-        flash(f'Závislost úspěšně smazána.', "success")
+        flash(f'Prerequisite deleted.', "success")
     else:
-        flash(f'Závislost nenalezena.', "warning")
+        flash(f'Prerequisite not found.', "warning")
     return redirect(f"/puzzles/{id_new_puzzle}")

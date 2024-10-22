@@ -34,9 +34,9 @@ def login():
                     return redirect(next_url)
                 return redirect('/')
             else:
-                flash(f"Neplatné přilašovací údaje.", "danger")
+                flash(f"Invalid login data.", "danger")
 
-    return render_template("login.html", title="Přihlášení", user=user)
+    return render_template("login.html", title="Login", user=user)
 
 
 @login_blueprint.route("/logout")
