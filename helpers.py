@@ -25,7 +25,7 @@ def admin_required(func):
     @wraps(func)
     def decorated_view(*args, **kwargs):
         if not current_user.is_admin:
-            flash("Tato stránka je dostupná pouze organizátorům.", "danger")
+            flash("This page is only accessible to organizers.", "danger")
             return redirect("/")
         return func(*args, **kwargs)
 

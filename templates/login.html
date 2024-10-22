@@ -4,24 +4,24 @@
 
 {% block content_main %}
 <main class="container login-form mt-4">
-    <h1>TMM webinfo</h1>
+    <h1>Puzzlehunt webinfo</h1>
     {% include "_flashes.html" %}
     <form method="post">
         <div class="row mb-3">
-            <label for="user" class="col-3 col-form-label">Tým</label>
+            <label for="user" class="col-3 col-form-label">Team</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="user" name="user" required value="{{ user }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="password" class="col-3 col-form-label">Heslo</label>
+            <label for="password" class="col-3 col-form-label">Password</label>
             <div class="col-9">
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <button type="submit" class="btn btn-primary">Přihlásit</button>
+                <button type="submit" class="btn btn-primary">Login</button>
             </div>
         </div>
     </form>

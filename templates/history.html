@@ -3,10 +3,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Historie: {{ team.name }}</h1>
+    <h1>History: {{ team.name }}</h1>
     {% if current_user.is_admin %}
-        <p><b>Telefon:</b> {{ team.phone }}</p>
-        <p><b>Poznámka:</b> {{ team.note }}</p>
+        <p><b>Phone:</b> {{ team.phone }}</p>
+        <p><b>Note:</b> {{ team.note }}</p>
     {% endif %}
     <ul class="list-group mb-3">
         {% for entry in history %}
@@ -21,7 +21,7 @@
                 {% if current_user.is_admin %}
                     <div>
                         <a class="btn btn-warning" href="{{ entry.edit_url }}" role="button"><i class="bi bi-pencil-square"></i></a>
-                        <form method="post" action="{{ entry.edit_url }}/delete" class="d-inline" onsubmit='return confirm("Smazat \"{{ entry.history_entry_html }}\"?")'>
+                        <form method="post" action="{{ entry.edit_url }}/delete" class="d-inline" onsubmit='return confirm("Delete \"{{ entry.history_entry_html }}\"?")'>
                             <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                         </form>
                 </div>
@@ -32,23 +32,23 @@
 
     {% if current_user.is_admin %}
         <button class="btn btn-primary mb-1 me-1" type="button" data-bs-toggle="collapse" data-bs-target="#submit_team_code" aria-expanded="false" aria-controls="submit_team_code">
-            Zadat kód místo týmu
+            Enter code instead of team
         </button>
         <button class="btn btn-primary mb-1 me-1" type="button" data-bs-toggle="collapse" data-bs-target="#use_team_hint" aria-expanded="false" aria-controls="use_team_hint">
-            Zobrazit týmu nápovědu
+            Show hint to team
         </button>
 
         <div id="submit_team_code" class="collapse">
-            <h2>Zadat kód místo týmu</h2>
+            <h2>Enter code instead of team</h2>
             <form method="post" action="/submit/{{ team.id_team }}">
                 <div class="row mb-3">
                     <div class="col d-flex">
                         <div class="flex-fill me-2">
-                            <input type="text" class="form-control" id="code" name="code" required value="" placeholder="Kód stanoviště nebo řešení šifry">
+                            <input type="text" class="form-control" id="code" name="code" required value="" placeholder="Code of a checkpoint or puzzle solution">
                             <label for="code"></label>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Odeslat</button>
+                            <button type="submit" class="btn btn-primary">Send</button>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
         </div>
 
         <div id="use_team_hint" class="collapse">
-            <h2>Zobrazit týmu nápovědu</h2>
+            <h2>Show hint to team</h2>
             <form method="post" action="/hint_team/{{ team.id_team }}">
                 <div class="row mb-3">
                     <div class="col">
@@ -83,7 +83,7 @@
                 <div class="row mb-3">
                     <div class="col">
                         <div>
-                            <button type="submit" class="btn btn-primary">Odeslat</button>
+                            <button type="submit" class="btn btn-primary">Send</button>
                         </div>
                     </div>
                 </div>

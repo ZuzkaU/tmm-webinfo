@@ -136,14 +136,15 @@ class Puzzle(db.Model):
         self.order = order
 
     def get_prerequisites(self):
+        print("GETTING PREREQUISITIES")
         p = Puzzle.query.join(PuzzlePrerequisite, Puzzle.id_puzzle == PuzzlePrerequisite.id_previous_puzzle)\
             .filter_by(id_new_puzzle=self.id_puzzle).all()
         return p
 
     def _get_used_hints(self, id_team):
-        return TeamUsedHint.query\
+        return TeamUsedHint.query.select_from(TeamUsedHint)\
             .filter_by(id_team=id_team)\
-            .join(Hint)\
+            .join(Hint, TeamUsedHint.id_hint == Hint.id_hint)\
             .filter(Hint.id_puzzle == self.id_puzzle)
 
     def get_used_hints(self, id_team):
@@ -254,7 +255,7 @@ class TeamArrived(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Příchod: {self.puzzle.puzzle}'
+        return f'Arrival: {self.puzzle.puzzle}'
 
     @property
     def edit_url(self):
@@ -286,7 +287,7 @@ class TeamSolved(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Vyřešeno: {self.puzzle.puzzle}'
+        return f'Solved: {self.puzzle.puzzle}'
 
     @property
     def edit_url(self):
@@ -315,7 +316,7 @@ class TeamSubmittedCode(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Zadán kód: "{self.code.code}"'
+        return f'Entered code: "{self.code.code}"'
 
     @property
     def edit_url(self):
@@ -344,7 +345,7 @@ class WrongCode(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Špatný kód: "{self.code}"'
+        return f'Wrong code: "{self.code}"'
 
     @property
     def edit_url(self):
@@ -380,9 +381,10 @@ class Hint(db.Model):
         return "hints_are_ordered" in puzzlehunt_settings and puzzlehunt_settings["hints_are_ordered"].value == "True"
 
     def _all_previous_hints_used(self, id_team):
+        print("GETTING PREVIOUS HINTS")
         previous_hints_count = TeamUsedHint.query\
             .filter_by(id_team=id_team)\
-            .join(Hint)\
+            .join(Hint, TeamUsedHint.id_hint == Hint.id_hint)\
             .filter(Hint.id_puzzle == self.id_puzzle)\
             .count()
         return previous_hints_count + 1 >= self.order
@@ -423,7 +425,7 @@ class TeamUsedHint(db.Model, HistoryEntry):
 
     @property
     def history_entry_html(self):
-        return f'Zobrazení {self.hint.order}. nápovědy u šifry "{self.hint.puzzle.puzzle}"'
+        return f'Showed {self.hint.order}. hint at puzzle "{self.hint.puzzle.puzzle}"'
 
     @property
     def edit_url(self):

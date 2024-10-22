@@ -43,15 +43,15 @@ def puzzlehunts_import():
                 prerequisites = [int(x) for x in row['prerequisites'].split(',') if x]
                 for prerequisite in prerequisites:
                     if prerequisite not in puzzles:
-                        flash(f'Chyba u šifry "{puzzle.puzzle}". Prerekvizity mohou být jen předchozí šifry.', "warning")
+                        flash(f'Error at puzzle "{puzzle.puzzle}". Prerequisites can only be previous puzzles.', "warning")
                     else:
                         db.session.add(PuzzlePrerequisite(puzzles[prerequisite], puzzle.id_puzzle))
 
             db.session.commit()
         except KeyError as e:
-            flash(f'Chyba při importu: chybí sloupec {e}.', "warning")
+            flash(f'Import error: Missing column {e}.', "warning")
         except ValueError as e:
-            flash(f'Chyba při importu: {e}', "warning")
+            flash(f'Import error: {e}', "warning")
 
         return redirect(f"/puzzlehunts")
     return render("puzzlehunts_csv_import.html")

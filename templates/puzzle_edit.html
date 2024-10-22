@@ -12,33 +12,33 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label for="puzzle" class="col-3 col-form-label required">Název šifry</label>
+            <label for="puzzle" class="col-3 col-form-label required">Puzzle name</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="puzzle" name="puzzle" required value="{{ puzzle.puzzle if puzzle else "" }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="puzzle" class="col-3 col-form-label">Zadání</label>
+            <label for="puzzle" class="col-3 col-form-label">Task</label>
             <div class="col-9">
                 {{ macros.html_textarea("assignment", puzzle.assignment if puzzle else "") }}
             </div>
         </div>
         <div class="row mb-3">
-            <label for="order" class="col-3 col-form-label required">Pořadí</label>
+            <label for="order" class="col-3 col-form-label required">Order</label>
             <div class="col-9">
                 <input type="number" class="form-control" id="order" name="order" required value="{{ puzzle.order if puzzle else order }}">
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <button type="submit" class="btn btn-primary mb-1 me-1">Uložit</button>
-                <a class="btn btn-secondary mb-1 me-1" href="/puzzles" role="button">Zpět</a>
+                <button type="submit" class="btn btn-primary mb-1 me-1">Save</button>
+                <a class="btn btn-secondary mb-1 me-1" href="/puzzles" role="button">Back</a>
             </div>
         </div>
     </form>
 
     {% if puzzle %}
-        <h2>Otevírací kódy</h2>
+        <h2>Opening codes</h2>
         <ul class="list-group mb-3">
             {% for code in arrival_codes %}
                 <li class="list-group-item d-flex align-items-center">
@@ -47,16 +47,16 @@
                     </div>
                     <div>
                         <a class="btn btn-warning" href="/puzzles/{{ puzzle.id_puzzle }}/arrival_codes/{{ code.id_arrival_code }}" role="button"><i class="bi bi-pencil-square"></i></a>
-                        <form method="post" action="/puzzles/{{ puzzle.id_puzzle }}/arrival_codes/{{ code.id_arrival_code }}/delete" class="d-inline" onsubmit='return confirm("Smazat kód \"{{ code.code }}\"?")'>
+                        <form method="post" action="/puzzles/{{ puzzle.id_puzzle }}/arrival_codes/{{ code.id_arrival_code }}/delete" class="d-inline" onsubmit='return confirm("Delete code \"{{ code.code }}\"?")'>
                             <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                         </form>
                     </div>
                 </li>
             {% endfor %}
         </ul>
-        <a class="btn btn-primary mb-1 me-1" href="/puzzles/{{ puzzle.id_puzzle }}/arrival_codes/new" role="button">Přidat otevírací kód</a>
+        <a class="btn btn-primary mb-1 me-1" href="/puzzles/{{ puzzle.id_puzzle }}/arrival_codes/new" role="button">Add opening code</a>
 
-        <h2>Řešení</h2>
+        <h2>Solutions</h2>
         <ul class="list-group mb-3">
             {% for code in solution_codes %}
                 <li class="list-group-item d-flex align-items-center">
@@ -65,38 +65,38 @@
                     </div>
                     <div>
                         <a class="btn btn-warning" href="/puzzles/{{ puzzle.id_puzzle }}/solution_codes/{{ code.id_solution_code }}" role="button"><i class="bi bi-pencil-square"></i></a>
-                        <form method="post" action="/puzzles/{{ puzzle.id_puzzle }}/solution_codes/{{ code.id_solution_code }}/delete" class="d-inline" onsubmit='return confirm("Smazat řešení \"{{ code.code }}\"?")'>
+                        <form method="post" action="/puzzles/{{ puzzle.id_puzzle }}/solution_codes/{{ code.id_solution_code }}/delete" class="d-inline" onsubmit='return confirm("Delete solution \"{{ code.code }}\"?")'>
                             <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                         </form>
                     </div>
                 </li>
             {% endfor %}
         </ul>
-        <a class="btn btn-primary mb-1 me-1" href="/puzzles/{{ puzzle.id_puzzle }}/solution_codes/new" role="button">Přidat řešení</a>
+        <a class="btn btn-primary mb-1 me-1" href="/puzzles/{{ puzzle.id_puzzle }}/solution_codes/new" role="button">Add solution</a>
 
-        <h2>Nápovědy</h2>
+        <h2>Hints</h2>
         <ul class="list-group mb-3">
             {% for hint in hints %}
                 <li class="list-group-item d-flex align-items-center">
                     <div style="width: 150px">
-                        {{ hint.order }}. (po {{ hint.minutes_to_open }} minutách)
+                        {{ hint.order }}. (in {{ hint.minutes_to_open }} minutes)
                     </div>
                     <div class="flex-fill">
                         {{ hint.hint|safe }}
                     </div>
                     <div>
                         <a class="btn btn-warning" href="/puzzles/{{ puzzle.id_puzzle }}/hints/{{ hint.id_hint }}" role="button"><i class="bi bi-pencil-square"></i></a>
-                        <form method="post" action="/puzzles/{{ puzzle.id_puzzle }}/hints/{{ hint.id_hint }}/delete" class="d-inline" onsubmit='return confirm("Smazat {{ hint.order }}. nápovědu?")'>
+                        <form method="post" action="/puzzles/{{ puzzle.id_puzzle }}/hints/{{ hint.id_hint }}/delete" class="d-inline" onsubmit='return confirm("Delete {{ hint.order }}. hint?")'>
                             <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                         </form>
                     </div>
                 </li>
             {% endfor %}
         </ul>
-        <a class="btn btn-primary mb-1 me-1" href="/puzzles/{{ puzzle.id_puzzle }}/hints/new" role="button">Přidat nápovědu</a>
+        <a class="btn btn-primary mb-1 me-1" href="/puzzles/{{ puzzle.id_puzzle }}/hints/new" role="button">Add hint</a>
 
-        <h2>Závislosti</h2>
-        <p>Šifry, které musí být vyřešené, aby se tahle zpřístupnila.</p>
+        <h2>Prerequisites</h2>
+        <p>Puzzles that need to be solved to unlock this one.</p>
         <ul class="list-group mb-3">
             {% for prerequisite in puzzle.get_prerequisites() %}
                 <li class="list-group-item d-flex align-items-center">
@@ -104,15 +104,15 @@
                         {{ prerequisite.puzzle }}
                     </div>
                     <div>
-                        <form method="post" action="/puzzles/{{ puzzle.id_puzzle }}/prerequisites/{{ prerequisite.id_puzzle }}/delete" class="d-inline" onsubmit='return confirm("Smazat závislost na \"{{ prerequisite.puzzle }}\"?")'>
+                        <form method="post" action="/puzzles/{{ puzzle.id_puzzle }}/prerequisites/{{ prerequisite.id_puzzle }}/delete" class="d-inline" onsubmit='return confirm("Delete prerequisite \"{{ prerequisite.puzzle }}\"?")'>
                             <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                         </form>
                     </div>
                 </li>
             {% endfor %}
         </ul>
-        <a class="btn btn-primary me-1 mb-3" href="/puzzles/{{ puzzle.id_puzzle }}/prerequisites/new" role="button">Přidat šifru</a>
+        <a class="btn btn-primary me-1 mb-3" href="/puzzles/{{ puzzle.id_puzzle }}/prerequisites/new" role="button">Add puzzle</a>
     {% else %}
-        <p>Nastavení nápověd, řešení a závislostí se objeví po uložení základních informací.</p>
+        <p>Hint, solution, and prerequisite settings will appear after saving basic info.</p>
     {% endif %}
 {% endblock content_admin %}

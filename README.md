@@ -23,6 +23,29 @@ Webinfo pro šifrovačky na Táboře mladých matematiků
 ```shell
 py -m flask --app tmm_webinfo run 
 ```
+or
+```shell
+flask --app tmm_webinfo run
+```
+
+For production:
+```shell
+gunicorn -w 4 -b 0.0.0.0:8080 tmm_webinfo:app
+sudo -E /home/tumi/anaconda3/envs/puzzle/bin/gunicorn -w 4 -b 0.0.0.0:80 --certfile=/etc/letsencrypt/live/puzzle.esn-tumi.de/fullchain.pem --keyfile=/etc/letsencrypt/live/puzzle.esn-tumi.de/privkey.pem tmm_webinfo:app
+```
+
+## Database
+https://phoenixnap.com/kb/mysql-docker-container
+You can set up mysql database in docker by using the following commands:
+```shell
+docker pull mysql/mysql-server:latest
+docker run --name=mysql-tmm -p 3307:3306 -e MYSQL_ROOT_PASSWORD=MyNewPass -d mysql/mysql-server:latest
+docker exec -it mysql-tmm bash
+mysql -u root -p
+CREATE USER 'webinfo'@'%' IDENTIFIED BY 'my_password';
+GRANT ALL PRIVILEGES ON *.* TO 'webinfo'@'%';
+CREATE DATABASE testDB;
+```
 
 ## Deployment
 

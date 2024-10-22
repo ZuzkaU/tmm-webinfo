@@ -5,13 +5,13 @@
 {% block content_admin %}
     <form method="post">
         <div class="row mb-3">
-            <label for="puzzlehunt" class="col-3 col-form-label required">Šifrovačka</label>
+            <label for="puzzlehunt" class="col-3 col-form-label required">Puzzle hunt</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="puzzlehunt" name="puzzlehunt" required>
             </div>
         </div>
         <div class="row mb-3">
-            <label for="minutes_to_hint" class="col-3 col-form-label required">Čas nápověd (minuty)</label>
+            <label for="minutes_to_hint" class="col-3 col-form-label required">Hint time (minutes)</label>
             <div class="col-9">
                 <input type="number" class="form-control" id="minutes_to_hint" name="minutes_to_hint" required>
             </div>
@@ -28,31 +28,32 @@
             <div class="col-12 col-sm-9">
                 <dl class="row mt-3">
                     <dt class="col-12 col-lg-3"><code>order</code></dt>
-                    <dd class="col-12 col-lg-9">pořadí šifry</dd>
+                    <dd class="col-12 col-lg-9">puzzle order</dd>
                     <dt class="col-12 col-lg-3"><code>puzzle</code></dt>
-                    <dd class="col-12 col-lg-9">název šifry</dd>
+                    <dd class="col-12 col-lg-9">puzzle name</dd>
                     <dt class="col-12 col-lg-3"><code>arrival_code</code></dt>
-                    <dd class="col-12 col-lg-9">kód pro příchod na stanoviště (zobrazení šifry v systému)</dd>
+                    <dd class="col-12 col-lg-9">code for arriving at the checkpoint (displaying the puzzle in the system)</dd>
                     <dt class="col-12 col-lg-3"><code>solution_code</code></dt>
-                    <dd class="col-12 col-lg-9">řešení šifry</dd>
+                    <dd class="col-12 col-lg-9">puzzle solution</dd>
                     <dt class="col-12 col-lg-3"><code>solution_message</code></dt>
-                    <dd class="col-12 col-lg-9">zpráva pro tým po vyřešení (může být HTML)</dd>
+                    <dd class="col-12 col-lg-9">message for the team after solving (can be HTML)</dd>
                     <dt class="col-12 col-lg-3"><code>hint_1</code></dt>
-                    <dd class="col-12 col-lg-9">první nápověda (může být HTML)</dd>
+                    <dd class="col-12 col-lg-9">first hint (can be HTML)</dd>
                     <dt class="col-12 col-lg-3"><code>hint_2</code></dt>
-                    <dd class="col-12 col-lg-9">druhá nápověda (může být HTML)</dd>
+                    <dd class="col-12 col-lg-9">second hint (can be HTML)</dd>
                     <dt class="col-12 col-lg-3"><code>prerequisites</code></dt>
-                    <dd class="col-12 col-lg-9">seznam šifer, které musí být vyřešeny, než jde zadat příchozí kód této šifry (zadává se jako seznam čísel &ndash; pořadí šifer &ndash; oddělených čárkami)</dd>
+                    <dd class="col-12 col-lg-9">list of puzzles that must be solved before the arrival code of this puzzle can be entered (entered as a list of numbers &ndash; puzzle order &ndash; separated by commas)</dd>
                 </dl>
-                <p>CSV zadávejte včetně hlavičky, oddělené čárkami (a pokud jsou v nějaké buňce čárky, dejte ji do uvozovek).</p>
+                <p>Enter the CSV including the header, separated by commas (and if any cell contains commas, enclose it in quotes).</p>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <button type="submit" class="btn btn-primary mb-1 me-1">Uložit</button>
-                <a class="btn btn-secondary mb-1 me-1" href="/puzzlehunts" role="button">Zpět</a>
+                <button type="submit" class="btn btn-primary mb-1 me-1">Save</button>
+                <a class="btn btn-secondary mb-1 me-1" href="/puzzlehunts" role="button">Back</a>
             </div>
         </div>
     </form>
-    <p>Další nastavení se objeví po uložení základních informací.</p>
+    <p>Additional settings will appear after saving the basic information.</p>
 {% endblock content_admin %}
+

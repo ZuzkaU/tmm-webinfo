@@ -11,33 +11,33 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label for="puzzlehunt" class="col-3 col-form-label required">Šifrovačka</label>
+            <label for="puzzlehunt" class="col-3 col-form-label required">Puzzle hunt</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="puzzlehunt" name="puzzlehunt" required value="{{ puzzlehunt.puzzlehunt if puzzlehunt else "" }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="minutes_to_hint" class="col-3 col-form-label">Výchozí čas nápovědy (minuty)</label>
+            <label for="minutes_to_hint" class="col-3 col-form-label">Time for hint (minutes)</label>
             <div class="col-9">
                 <input type="number" class="form-control" id="minutes_to_hint" name="minutes_to_hint" value="{{ puzzlehunt_settings["minutes_to_hint"].value if "minutes_to_hint" in puzzlehunt_settings }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="hints_are_ordered" class="col-3 col-form-label">Nápovědy se musí brát popořadě</label>
+            <label for="hints_are_ordered" class="col-3 col-form-label">Hints need to be taken in the correct order</label>
             <div class="col-9">
                 <input type="checkbox" class="form-check-input" id="hints_are_ordered" name="hints_are_ordered" style="margin-top: 0.75rem"
                         {{ "checked" if not puzzlehunt or "hints_are_ordered" in puzzlehunt_settings and puzzlehunt_settings["hints_are_ordered"].value == "True" }}>
             </div>
         </div>
         <div class="row mb-3">
-            <label for="hint_penalty" class="col-3 col-form-label">Penalizace za nápovědu (minuty)</label>
+            <label for="hint_penalty" class="col-3 col-form-label">Hint penalization (minutes)</label>
             <div class="col-9">
                 <input type="number" class="form-control" id="hint_penalty" name="hint_penalty" value="{{ puzzlehunt_settings["hint_penalty"].value if "hint_penalty" in puzzlehunt_settings }}">
             </div>
         </div>
         {% if puzzlehunt %}
             <div class="row mb-3">
-                <label for="start_code" class="col-3 col-form-label">Kód pro start</label>
+                <label for="start_code" class="col-3 col-form-label">Start code</label>
                 <div class="col-9">
                     <select class="form-select" id="start_code" name="start_code">
                         <option value="" {{ "selected" if "start_code" not in puzzlehunt_settings or puzzlehunt_settings["start_code"].value == "" }}></option>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="finish_code" class="col-3 col-form-label">Kód pro cíl</label>
+                <label for="finish_code" class="col-3 col-form-label">Finish code</label>
                 <div class="col-9">
                     <select class="form-select" id="finish_code" name="finish_code">
                         <option value="" {{ "selected" if "finish_code" not in puzzlehunt_settings or puzzlehunt_settings["finish_code"].value == "" }}></option>
@@ -67,13 +67,13 @@
         {% endif %}
         <div class="row mb-3">
             <div class="col">
-                <button type="submit" class="btn btn-primary mb-1 me-1">Uložit</button>
-                <a class="btn btn-secondary mb-1 me-1" href="/puzzlehunts" role="button">Zpět</a>
+                <button type="submit" class="btn btn-primary mb-1 me-1">Save</button>
+                <a class="btn btn-secondary mb-1 me-1" href="/puzzlehunts" role="button">Back</a>
             </div>
         </div>
     </form>
     {% if puzzlehunt %}
-        <h2>Kódy</h2>
+        <h2>Codes</h2>
         <ul class="list-group mb-3">
             {% for code in codes %}
                 <li class="list-group-item d-flex align-items-center">
@@ -82,15 +82,15 @@
                     </div>
                     <div>
                         <a class="btn btn-warning" href="/puzzlehunts/{{ puzzlehunt.id_puzzlehunt }}/codes/{{ code.id_code }}" role="button"><i class="bi bi-pencil-square"></i></a>
-                        <form method="post" action="/puzzlehunts/{{ puzzlehunt.id_puzzlehunt }}/codes/{{ code.id_code }}/delete" class="d-inline" onsubmit='return confirm("Smazat kód \"{{ code.code }}\"?")'>
+                        <form method="post" action="/puzzlehunts/{{ puzzlehunt.id_puzzlehunt }}/codes/{{ code.id_code }}/delete" class="d-inline" onsubmit='return confirm("Delete code \"{{ code.code }}\"?")'>
                             <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                         </form>
                     </div>
                 </li>
             {% endfor %}
         </ul>
-        <a class="btn btn-primary mb-1 me-1" href="/puzzlehunts/{{ puzzlehunt.id_puzzlehunt }}/codes/new" role="button">Přidat kód</a>
+        <a class="btn btn-primary mb-1 me-1" href="/puzzlehunts/{{ puzzlehunt.id_puzzlehunt }}/codes/new" role="button">Add code</a>
     {% else %}
-        <p>Další nastavení se objeví po uložení základních informací.</p>
+        <p>Further settings will appear after saving the basic info.</p>
     {% endif %}
 {% endblock content_admin %}

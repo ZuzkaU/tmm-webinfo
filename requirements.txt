@@ -4,3 +4,7 @@ Flask_Login==0.6.2
 Flask_SQLAlchemy==2.5.1
 PyYAML==6.0
 scipy>=1.0.0
+Werkzeug==2.2.2
+SQLAlchemy==1.4
+mysql-connector-python==8.2.0
+gunicorn==21.2.0
