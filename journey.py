@@ -161,7 +161,7 @@ def use_hint(id_hint, id_team=None):
     team_used_hint = TeamUsedHint(id_team, id_hint)
     db.session.add(team_used_hint)
     db.session.commit()
-    flash(f'Nápověda:<div class="mt-2">{hint.hint}</div>', "success")
+    flash(f'Hint:<div class="mt-2">{hint.hint}</div>', "success")
     return redirect("/")
 
 

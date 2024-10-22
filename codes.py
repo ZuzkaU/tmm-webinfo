@@ -118,7 +118,7 @@ def arrival_codes_edit(id_puzzle, id_arrival_code):
         db.session.commit()
         return redirect(f"/puzzles/{id_puzzle}")
     else:
-        return render("code_edit.html", heading="Upravit kód", back_url=f"/puzzles/{id_puzzle}", code=arrival_code, puzzle=puzzle)
+        return render("code_edit.html", heading="Edit code", back_url=f"/puzzles/{id_puzzle}", code=arrival_code, puzzle=puzzle)
 
 
 @codes.route('/puzzles/<id_puzzle>/arrival_codes/<id_arrival_code>/delete', methods=("POST",))
