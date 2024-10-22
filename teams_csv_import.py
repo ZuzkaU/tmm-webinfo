@@ -25,9 +25,9 @@ def teams_import():
 
             db.session.commit()
         except KeyError as e:
-            flash(f'Chyba při importu: chybí sloupec {e}.', "warning")
+            flash(f'Import error: missing column {e}.', "warning")
         except ValueError as e:
-            flash(f'Chyba při importu: {e}', "warning")
+            flash(f'Import error: {e}', "warning")
 
         return redirect(f"/teams")
     return render("teams_csv_import.html")

@@ -1,6 +1,6 @@
 # tmm-webinfo
 
-Webinfo pro šifrovačky na Táboře mladých matematiků
+Webinfo for puzzle hunts stolen (borrowed) from TMM and translated to English.
 
 ## How to run
 

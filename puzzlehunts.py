@@ -43,7 +43,7 @@ def puzzlehunts_new():
 def puzzlehunts_edit(id_puzzlehunt):
     puzzlehunt = Puzzlehunt.query.get(id_puzzlehunt)
     if puzzlehunt is None:
-        flash(f"Šifrovačka s id_puzzlehunt={id_puzzlehunt} neexistuje.", "warning")
+        flash(f"Puzzle hunt with id_puzzlehunt={id_puzzlehunt} doesn't exist.", "warning")
         return redirect("/puzzlehunts")
     puzzlehunt_settings = Puzzlehunt.get_settings_for_id(id_puzzlehunt)
 

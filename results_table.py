@@ -31,7 +31,7 @@ def progress():
     finish_code = int(puzzlehunt_settings["finish_code"].value)
 
     if "start_code" not in puzzlehunt_settings or puzzlehunt_settings["start_code"].value == "":
-        flash("Není nastaven kód pro start, zobrazený start je čas příchodu týmu na první šifru.", "warning")
+        flash("Start code is not set, start time is the arrival of the first team to the first puzzle.", "warning")
         start_code = None
     else:
         start_code = int(puzzlehunt_settings["start_code"].value)

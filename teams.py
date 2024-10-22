@@ -29,7 +29,7 @@ def teams_new():
 def teams_edit(id_team):
     team = Team.query.get(id_team)
     if team is None:
-        flash(f"Tým s id_team={id_team} neexistuje.", "warning")
+        flash(f"Team with id_team={id_team} doesn't exist.", "warning")
         return redirect("/teams")
 
     if request.method == "POST":
@@ -50,10 +50,10 @@ def teams_edit(id_team):
 def teams_delete(id_team):
     team = Team.query.get(id_team)
     if team is None:
-        flash(f"Tým s id_team={id_team} neexistuje.", "warning")
+        flash(f"Team with id_team={id_team} doesn't exist.", "warning")
         return redirect("/teams")
 
     db.session.delete(team)
     db.session.commit()
-    flash(f'Tým "{team.name}" (id={team.id}) smazán.', "success")
+    flash(f'Team "{team.name}" (id={team.id}) deleted.', "success")
     return redirect("/teams")
