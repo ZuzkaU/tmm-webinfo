@@ -1,0 +1,8 @@
+secret: "test"
+admin_password: "admin"
+timezone: 'Europe/Prague'
+db:
+  user: "db_user"
+  password: "db_password"
+  hostname: "db_hostname"
+  database: "db_database_name"
