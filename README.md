@@ -1,6 +1,6 @@
 # tmm-webinfo
 
-Webinfo for puzzle hunts stolen (borrowed) from TMM and translated to English.
+Webinfo for puzzle hunts stolen (borrowed) from [TMM](https://github.com/Tabor-Mladych-Matematiku/tmm-webinfo) and translated to English.
 
 ## How to run
 
