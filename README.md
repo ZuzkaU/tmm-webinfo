@@ -63,4 +63,5 @@ What is needed to do in order to run again a TUMi puzzle hunt from the last seme
 8. Start the app encrypted with certificates, ideally in tmux
 9. Create the puzzle hunt in the app from `puzzle_hunt.csv`
 10. Create the teams from the participants entries in the forms
+
 When participants first get the link, the app might crash if it doesn't have enough resources, but will recover again (or just start it again, the data stay in the db).
